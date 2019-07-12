@@ -1,40 +1,184 @@
 
-var guesses = 9;
-document.querySelector('p').innerText = guesses;
+var computerguess = ['1','2','3','4','5','6','7','8','9']
+var win = 0;
+var loses = 0;
+var guessesleft=5;
+var letteruser = [];
 
-function updateguessnum() {
-    if (guesses == 0) {
-        guesses = 9;
-        document.querySelector('p').innerText = guesses;
-    } else {
-        guesses = guesses - 1;
-        document.querySelector('p').innerText = guesses;
-    }
+var compchoice = computerguess[Math.floor(Math.random()*computerguess.length)];
+
+function guessesleftcounter (){
+    document.querySelector("#gu").innerHTML="Guesses Left:"+guessesleft;
+
 }
 
-document.onkeypress = updateguessnum;
+guessesleftcounter();
 
-var arrToGuess = ["r", "i", "c", "k", "y"];
-var inputletter = [];
-function printWord() {
-    inputletter.push(event.key);
-
-    var str = "";
-
-    for (var i = 0; i < arrToGuess.length; i++) {
-        if (inputletter.includes(arrToGuess[i])) {
-            str += arrToGuess[i];
-            //alternativelty
-            // str = str + strToGuess[i];
-        } else {
-            str += "_";
-        }
-    }
-
-    document.querySelector('p1').innerText = str;
+function letterpicked (){
+    document.querySelector("#letter").innerHTML='Guess so far:'+letteruser.join('');
 }
 
-document.onkeypress = printWord;
+
+var restart = function(){
+    guessesleft=5;
+
+    letteruser=[];
+    var compchoice = computerguess[Math.floor(Math.random()*computerguess.length)];
+}
+
+document.onkeyup= function(event){
+    
+    var userguess = String.fromCharCode(event.keyCode);
+    guessesleft--;
+    letteruser.push(userguess);
+    letterpicked();
+    guessesleftcounter();
+    
+
+    if (userguess==compchoice){
+        win++;
+        document.querySelector('#wins').innerHTML="Wins:"+win;
+        alert('You Win!');
+        restart();
+
+
+    }else if(guessesleft==0){
+        loses++;
+        document.querySelector('#lose').innerHTML="Loses:"+loses;
+        alert('You Lose');
+        restart();
+    }
+};
+
+
+
+
+
+//Backgroud
+
+
+var c = document.getElementById("c"); 
+ var ctx = c.getContext("2d"); 
+  
+  
+ c.height = window.innerHeight; 
+ c.width = window.innerWidth; 
+  
+ 
+ var numbers = "012345678910"; 
+  
+ numbers = numbers.split(""); 
+  
+ var font_size = 18; 
+ var columns = c.width/font_size;  
+  
+ var drops = []; 
+  
+  
+ for(var x = 0; x < columns; x++) 
+ 	drops[x] = 1;  
+  
+  
+ function draw() 
+ { 
+ 	  
+ 	 
+ 	ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; 
+ 	ctx.fillRect(0, 0, c.width, c.height); 
+ 	 
+ 	ctx.fillStyle = "#0F0";  
+ 	ctx.font = font_size + "px arial"; 
+ 	 
+ 	for(var i = 0; i < drops.length; i++) 
+ 	{ 
+ 		 
+ 		var text = numbers[Math.floor(Math.random()*numbers.length)]; 
+ 		 
+ 		ctx.fillText(text, i*font_size, drops[i]*font_size); 
+ 		 
+ 	 
+ 		if(drops[i]*font_size > c.height && Math.random() > 0.975) 
+ 			drops[i] = 0; 
+ 		 
+ 		 
+ 		drops[i]++; 
+ 	} 
+ } 
+  
+ setInterval(draw, 50); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ar guesses = 9;
+
+// document.querySelector('p').innerText = guesses;
+
+// function updateguessnum() {
+//     if (guesses == 0) {
+//         guesses = 9;
+//         document.querySelector('p').innerText = guesses;
+//     } else {
+//         guesses = guesses - 1;
+//         document.querySelector('p').innerText = guesses;
+//     }
+// }
+
+// document.onkeypress = updateguessnum;
+
+// var arrToGuess = ["r", "i", "c", "k", "y"];
+// var inputletter = [];
+// function printWord() {
+//     inputletter.push(event.key);
+
+//     var str = "";
+
+//     for (var i = 0; i < arrToGuess.length; i++) {
+//         if (inputletter.includes(arrToGuess[i])) {
+
+//             str += arrToGuess[i];
+//             updateguessnum();
+           
+//         } else {
+//             str += "_";
+//         }
+//     }
+
+//     document.querySelector('p1').innerText = str;
+// }
+
+// document.onkeypress = printWord;
 
 //     var strToGuess = "apple";
 // 	var guesses = [];
@@ -115,4 +259,74 @@ document.onkeypress = printWord;
 
 // }
 
+// activity 1 on 6.29
+// function greetings(){
+//     console.log('hello');
+//     console.log('bye');
+//     console.log('farewell');
+// }
 
+// function write(){
+//     document.write('bye<br>');
+// }
+
+// activity 2 on 6.29
+    // function sum(a,b){
+    //     console.log(a+b);
+    // }
+    // sum(5,5);
+
+    //activity 3 on 6.29
+    //     function sum(a,b){
+    //     console.log(a*b);
+    // }
+    // sum(5,5);
+
+ //activity 4 on 6.29
+    // function verify(a,b){
+    //     console.log(a==b);
+    
+    // }
+    // verify(4,7);//false
+    // verify(2,2);//true
+
+    //act 5 on 6.29
+    // function biggernum(a){
+    //     console.log(a>3);
+    // }
+    // biggernum (2);//false
+    // biggernum(5);//true
+
+     // example 1 6.29
+
+    // function subtract (a,b){
+    //     return a-b;
+    // }
+    // var diff= subtract(15,7);
+
+    // console.log(diff);
+
+    // function add(a,b){
+    //     return a+b;
+    // }
+    // var sum= add(diff,4);
+
+    // console.log(sum);
+
+    //     activity 2 on 6.29
+    // function equal(a,b){
+    //     return a==b;
+    // }
+    // var val = equal(5,8);
+    // console.log(val);
+    // var valtwo = equal(5,5);
+    // console.log(valtwo);
+    //     activity 3 on 6.29
+    // function greater(a){
+    //     return a>3;
+    // }
+    // var isit = greater(5);
+    // console.log(isit);
+
+    // var itsnot = greater(2);
+    // console.log(itsnot);
