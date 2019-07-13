@@ -54,7 +54,7 @@ document.onkeyup= function(event){
 
 
 
-//Backgroud
+//Background by Harry Tasci
 
 
 var c = document.getElementById("c"); 
